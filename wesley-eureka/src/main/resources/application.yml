@@ -4,6 +4,7 @@ server:
 eureka:
   instance:
     hostname: localhost
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
   #  禁用eureka注册自己作为客户端
     registerWithEureka: false
