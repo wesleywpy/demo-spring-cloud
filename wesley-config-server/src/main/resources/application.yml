@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: wesley-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: http://git.winxuan.io/wangpanyong/config-repo
+          username: wangp_yong@163.com
+          password: 111111
