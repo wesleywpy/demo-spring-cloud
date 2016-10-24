@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: wesley-config-server
+  rabbitmq:
+    addresses: 10.100.15.176
   cloud:
     config:
       server:
@@ -11,3 +13,14 @@ spring:
           uri: http://git.winxuan.io/wangpanyong/config-repo
           username: wangp_yong@163.com
           password: 111111
+
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 10
+    metadataMap:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${random.value}}}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+#      defaultZone: http://10.100.15.176:8761/eureka/
