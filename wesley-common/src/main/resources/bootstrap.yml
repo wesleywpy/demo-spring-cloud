@@ -1,0 +1,28 @@
+server:
+  port: 8070
+
+logging:
+  level:
+    root: INFO
+
+#分布式配置
+spring:
+  application:
+    name: wesley_common
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: wesley-config-server
+      profile: dev
+
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 30
+    metadataMap:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${random.value}}}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+#      defaultZone: http://10.100.15.176:8761/eureka/
