@@ -1,7 +1,9 @@
-FROM java:8
-VOLUME /tmp
+FROM hub.c.163.com/library/java:8
 
-ADD wesley-eureka.jar /app.jar
-RUN bash -c 'touch /app.jar'
+MAINTAINER "wesleywong666@gmail.com"
+
+COPY eureka.jar /app.jar
+
 EXPOSE 8761
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+
+ENTRYPOINT ["java","-jar","/app.jar"]

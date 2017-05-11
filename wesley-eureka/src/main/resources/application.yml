@@ -6,7 +6,7 @@ eureka:
     hostname: localhost
     instanceId: ${vcap.application.instance_id}:${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
-  #  禁用eureka注册自己作为客户端
+    #禁用eureka注册自己作为客户端
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
