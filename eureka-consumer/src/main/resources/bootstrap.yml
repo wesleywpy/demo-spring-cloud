@@ -1,7 +1,7 @@
 #分布式配置
 spring:
   application:
-    name: wesley-common
+    name: eureka-consumer
 #  cloud:
 #    config:
 #      discovery:

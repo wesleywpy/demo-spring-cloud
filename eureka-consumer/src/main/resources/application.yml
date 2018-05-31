@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 2101
 
 logging:
   level:
@@ -15,8 +15,8 @@ eureka:
     lease-expiration-duration-in-seconds: 30
   client:
     serviceUrl:
-      defaultZone: http://192.168.0.110:8761/eureka/
+      defaultZone: http://192.168.2.151:8761/eureka/
 
 spring:
   application:
-    name: wesley-common
+    name: eureka-consumer
