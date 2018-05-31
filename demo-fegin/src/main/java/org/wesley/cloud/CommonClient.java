@@ -9,7 +9,7 @@ import org.wesley.cloud.hystrix.CommonClientHystrix;
 /**
  * @author Created by Wesley on 2016/8/12.
  */
-@FeignClient(value = "wesley-common", fallback = CommonClientHystrix.class)
+@FeignClient(value = "eureka-client", fallback = CommonClientHystrix.class)
 public interface CommonClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/add")
