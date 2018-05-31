@@ -1,9 +1,9 @@
-FROM hub.c.163.com/library/java:8
+FROM java:8u111-jdk-alpine
 
-MAINTAINER "wesleywong666@gmail.com"
+MAINTAINER "wangp_yong@163.com"
 
-COPY eureka.jar /app.jar
+COPY demo-eureka.jar /eureka.jar
 
 EXPOSE 8761
 
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar","/eureka.jar"]

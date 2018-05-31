@@ -5,13 +5,14 @@ eureka:
   instance:
     hostname: localhost
   client:
-    #禁用eureka注册自己作为客户端
-    registerWithEureka: false
-    fetchRegistry: false
-    serviceUrl:
+    # 禁用eureka注册自己作为客户端
+    register-with-eureka: false
+    # 获取注册信息
+    fetch-registry: false
+    service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   server:
-    #设为false，关闭自我保护
+    # 本地调试，设为false，关闭自我保护
     enable-self-preservation: false
     # 清理间隔（单位毫秒，默认是60*1000）
-    eviction-interval-timer-in-ms: 5000
+    eviction-interval-timer-in-ms: 120000
