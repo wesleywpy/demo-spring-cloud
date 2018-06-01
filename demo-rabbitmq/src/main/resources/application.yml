@@ -1,0 +1,18 @@
+server:
+  port: 8101
+
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.2.151:8761/eureka/
+
+spring:
+  application:
+    name: demo-rabbitmq
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: wesley
+    password: 123456
