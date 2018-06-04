@@ -1,6 +1,7 @@
-package org.wesley.cloud;
+package org.wesley.cloud.client;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,4 +15,7 @@ public interface CommonClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/add")
     Integer add(@RequestParam(value = "a") Integer a, @RequestParam(value = "b") Integer b);
+
+    @GetMapping("/dc")
+    String consumer();
 }

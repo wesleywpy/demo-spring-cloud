@@ -2,7 +2,7 @@ package org.wesley.cloud.hystrix;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.wesley.cloud.CommonClient;
+import org.wesley.cloud.client.CommonClient;
 
 /**
  * 断路器
@@ -14,6 +14,11 @@ public class CommonClientHystrix implements CommonClient {
     @Override
     public Integer add(@RequestParam(value = "a") Integer a, @RequestParam(value = "b") Integer b) {
         return -9999;
+    }
+
+    @Override
+    public String consumer() {
+        return "fallback";
     }
 
 }
