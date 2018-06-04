@@ -14,42 +14,12 @@
         <version>1.5.13.RELEASE</version>
     </parent>
 
-    <!-- <modules>
-        <module>wesley-eureka</module>
-        <module>wesley-zuul</module>
-        <module>wesley-common</module>
-        <module>wesley-fegin</module>
-    </modules> -->
-
     <properties>
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    <dependencyManagement>
-    	<dependencies>
-	        <dependency>
-	            <groupId>org.springframework.cloud</groupId>
-	            <artifactId>spring-cloud-dependencies</artifactId>
-	            <version>Edgware.SR3</version>
-	            <type>pom</type>
-	            <scope>import</scope>
-	        </dependency>
-    	</dependencies>
-    </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
-        </dependency>        
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
-        </dependency>
-    </dependencies>
 
     <build>
         <plugins>
