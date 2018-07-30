@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ConfigClientController {
 
+  /**
+   * 从配置服务读取配置文件信息
+   */
   @Value("${spring.application.name}")
   private String profile;
 
