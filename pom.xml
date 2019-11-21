@@ -17,6 +17,7 @@
 
     <modules>
         <module>wesley-modules</module>
+        <module>wesley-api</module>
     </modules>
 
     <properties>
