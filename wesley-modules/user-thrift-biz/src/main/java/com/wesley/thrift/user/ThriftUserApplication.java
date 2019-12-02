@@ -1,5 +1,6 @@
 package com.wesley.thrift.user;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
@@ -13,7 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ThriftUserApplication {
 
     public static void main(String[] args) {
-
+        SpringApplication.run(ThriftUserApplication.class, args);
     }
 
 }
