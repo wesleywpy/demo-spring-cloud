@@ -1,5 +1,6 @@
 package com.wesley.user.controller;
 
+import com.google.common.collect.Lists;
 import com.wesley.thrift.user.UserDTO;
 import com.wesley.user.domain.vo.UserVO;
 import com.wesley.user.support.ThriftClient;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -25,7 +28,7 @@ public class UserController {
     @Autowired
     ThriftClient thriftClient;
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/users/{id}/thrift")
     public UserVO getUserById(@PathVariable String id) {
         UserVO result = new UserVO();
         try {
@@ -38,5 +41,10 @@ public class UserController {
             thriftClient.close();
         }
         return result;
+    }
+
+    @GetMapping("/users")
+    public List<UserVO> getUser() {
+        return Lists.newArrayList();
     }
 }
