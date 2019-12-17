@@ -18,6 +18,7 @@
     <modules>
         <module>wesley-modules</module>
         <module>wesley-api</module>
+        <module>wesley-auth</module>
     </modules>
 
     <properties>
