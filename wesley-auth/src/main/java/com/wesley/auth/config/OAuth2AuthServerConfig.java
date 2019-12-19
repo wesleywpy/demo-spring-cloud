@@ -44,13 +44,14 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        String secret = passwordEncoder.encode("123456");
 
         // 客户端信息 来自内存
         clients.inMemory()
                // 客户端Id
                .withClient("orderService")
                // 客户端密钥 , Id和密钥用于HttpBasic认证
-               .secret(passwordEncoder.encode("123456"))
+               .secret(secret)
                // 当前Client 能够访问资源服务器的 自定义权限
                .scopes("read", "write")
                // 当前Client Token有效时间 单位:秒
