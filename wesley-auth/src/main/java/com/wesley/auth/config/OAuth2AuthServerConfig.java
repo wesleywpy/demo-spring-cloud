@@ -1,6 +1,7 @@
 package com.wesley.auth.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,6 +10,10 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+
+import javax.sql.DataSource;
 
 /**
  * <p>
@@ -26,6 +31,15 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
 
     @Autowired
     AuthenticationManager authenticationManager;
+
+    @Autowired
+    DataSource dataSource;
+
+    @Bean
+    public TokenStore tokenStore() {
+        // 使用数据库存储Token信息
+        return new JdbcTokenStore(dataSource);
+    }
 
     /**
      * 配置非安全特性相关信息
@@ -47,6 +61,7 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
         String secret = passwordEncoder.encode("123456");
 
         // 客户端信息 来自内存
+        /**
         clients.inMemory()
                // 客户端Id
                .withClient("orderService")
@@ -60,6 +75,9 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
                .resourceIds("order-service")
                // 当前Client 支持哪些OAuth2的授权模式
                .authorizedGrantTypes("password");
+        */
+        // 客户端信息 来自数据库
+        clients.jdbc(dataSource);
     }
 
     /**

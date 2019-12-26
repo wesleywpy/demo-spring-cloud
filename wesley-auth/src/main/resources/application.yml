@@ -1,2 +1,11 @@
 server:
   port: 9090
+
+spring:
+  application:
+    name: auth-server
+  datasource:
+    url: jdbc:mysql://182.151.11.185:3306/customer?characterEncoding=utf8&useSSL=false&characterSetResults=utf8&autoReconnect=true
+    username: root
+    password: UokoP@ssw0rdf
+    driver-class-name: com.mysql.jdbc.Driver

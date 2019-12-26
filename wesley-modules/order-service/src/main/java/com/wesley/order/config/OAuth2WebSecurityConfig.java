@@ -1,28 +1,27 @@
 package com.wesley.order.config;
-
+/**
 import com.wesley.order.service.UserDetailsServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.provider.token.*;
 
 /**
  * <p>
- * 应用Web安全配置
+ *  应用Web安全配置
+ *  token认证交给 网关验证
  * </p>
  *
  * @author Created by Yani on 2019/12/24
- */
-@Configuration
-@EnableWebSecurity
+
+
+//@Configuration
+//@EnableWebSecurity
 public class OAuth2WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
+//    @Autowired
     UserDetailsServiceImpl userDetailsService;
 
-    @Bean
+
+//    @Bean token认证交给 网关验证
     public ResourceServerTokenServices tokenServices() {
         // 与认证服务器通信, 进行Token验证
         RemoteTokenServices tokenServices = new RemoteTokenServices();
@@ -33,9 +32,7 @@ public class OAuth2WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return tokenServices;
     }
 
-    /**
-     * token转换器
-     */
+    // token转换器
     private AccessTokenConverter getAccessTokenConverter() {
         DefaultAccessTokenConverter tokenConverter = new DefaultAccessTokenConverter();
         DefaultUserAuthenticationConverter authenticationConverter = new DefaultUserAuthenticationConverter();
@@ -44,3 +41,4 @@ public class OAuth2WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return tokenConverter;
     }
 }
+ */

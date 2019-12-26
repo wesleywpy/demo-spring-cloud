@@ -1,21 +1,21 @@
 package com.wesley.order.config;
-
-import org.springframework.context.annotation.Configuration;
+/**
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
 /**
  * <p>
  *  OAuth2 资源服务器配置
+ *  交给网关配置
  * </p>
  *
  * @author Created by Yani on 2019/12/24
- */
-@Configuration
-@EnableResourceServer
+
+
+//@Configuration
+//@EnableResourceServer
 public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
@@ -33,4 +33,6 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
 
     }
 
+
 }
+ */
