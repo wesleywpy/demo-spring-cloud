@@ -1,0 +1,40 @@
+server:
+  port: 9070
+zuul:
+  routes:
+    # 认证服务路由前缀
+    token:
+      url: http://localhost:9090
+    # 订单服务路由前缀
+    order:
+      url: http://localhost:9080
+  # 不传递的header, 空则所有Header都会传递
+  sensitive-headers:
+  # 应用限流
+  ratelimit:
+    enabled: true
+    # 支持 REDIS, JPA
+    repository: JPA
+    default-policy-list:
+      # 单位时间内, 请求次数
+    - limit: 2
+      # 单位时间内, 所有请求时间不能超过多少秒
+      quota: 1
+      # 限流时间频率, 单位秒
+      refresh-interval: 3
+      # 限流类型, 可通过 DefaultRateLimitKeyGenerator 类实现自定义限流
+      type:
+      - url
+      - httpmethod
+
+spring:
+  application:
+    name: gateway
+  datasource:
+    url: jdbc:mysql://182.151.11.185:3306/customer?characterEncoding=utf8&useSSL=false&characterSetResults=utf8&autoReconnect=true
+    username: root
+    password: UokoP@ssw0rdf
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    generate-ddl: true
+    show-sql: true
