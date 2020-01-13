@@ -7,6 +7,7 @@
         <module>user-thrift-biz</module>
         <module>user-service</module>
         <module>order-service</module>
+        <module>user-signin</module>
     </modules>
 
     <parent>
