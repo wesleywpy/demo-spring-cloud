@@ -1,8 +1,10 @@
 package com.wesley.auth.config;
 
+import com.wesley.auth.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -11,7 +13,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
 import javax.sql.DataSource;
 
@@ -35,10 +39,29 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
     @Autowired
     DataSource dataSource;
 
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
+
     @Bean
     public TokenStore tokenStore() {
         // 使用数据库存储Token信息
-        return new JdbcTokenStore(dataSource);
+//        return new JdbcTokenStore(dataSource);
+        // JWT 格式令牌
+        return new JwtTokenStore(jwtTokenEnhancer());
+    }
+
+    /**
+     * {@link org.springframework.security.oauth2.provider.endpoint.TokenKeyEndpoint} 需要依赖JwtAccessTokenConverter
+     */
+    @Bean
+    public JwtAccessTokenConverter jwtTokenEnhancer() {
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        // 设置签名Key
+//        converter.setSigningKey("123456");
+        // 使用证书作为签名Key
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jojo.key"), "123456".toCharArray());
+        converter.setKeyPair(keyStoreKeyFactory.getKeyPair("jojo"));
+        return converter;
     }
 
     /**
@@ -50,7 +73,12 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.authenticationManager(authenticationManager);
+        endpoints
+                .userDetailsService(userDetailsService)
+                // Token存储方式
+                .tokenStore(tokenStore())
+                .tokenEnhancer(jwtTokenEnhancer())
+                .authenticationManager(authenticationManager);
     }
 
     /**
@@ -71,7 +99,7 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
                .scopes("read", "write")
                // 当前Client Token有效时间 单位:秒
                .accessTokenValiditySeconds(3600)
-               // 当前Client 能够访问哪些 资源服务器
+               // 当前Client 能够访问哪些 资源服务器, 为空则可以访问所有资源服务器
                .resourceIds("order-service")
                // 当前Client 支持哪些OAuth2的授权模式
                .authorizedGrantTypes("password");
@@ -88,6 +116,8 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security
+                // 访问 /oauth/token_key Endpoint需要身份认证
+                .tokenKeyAccess("isAuthenticated()")
                 // 验证token 也需要是已授权的
                 .checkTokenAccess("isAuthenticated()");
     }

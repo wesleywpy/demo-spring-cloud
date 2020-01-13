@@ -3,7 +3,7 @@ CREATE TABLE `oauth_client_details` (
   `client_id` varchar(256) NOT NULL COMMENT '客户端Id',
   `client_secret` varchar(256) DEFAULT NULL COMMENT '客户端密钥',
   `scope` varchar(256) DEFAULT NULL COMMENT '当前Client 能够访问资源服务器的 自定义权限',
-  `resource_ids` varchar(256) DEFAULT NULL COMMENT '当前Client 能够访问哪些 资源服务器',
+  `resource_ids` varchar(256) DEFAULT NULL COMMENT '当前Client 能够访问哪些 资源服务器, 为空则可以访问所有资源服务器',
   `authorized_grant_types` varchar(256) DEFAULT NULL COMMENT '当前Client 支持哪些OAuth2的授权模式',
   `web_server_redirect_uri` varchar(256) DEFAULT NULL,
   `authorities` varchar(256) DEFAULT NULL,

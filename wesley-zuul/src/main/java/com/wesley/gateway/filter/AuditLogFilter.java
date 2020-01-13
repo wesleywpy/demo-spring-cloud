@@ -3,7 +3,6 @@ package com.wesley.gateway.filter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.exception.ZuulException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component;
  * @author Created by Yani on 2019/12/26
  */
 @Slf4j
-@Component
+//@Component SpringSecurity已实现
 public class AuditLogFilter extends ZuulFilter {
     @Override
     public String filterType() {
@@ -35,7 +34,5 @@ public class AuditLogFilter extends ZuulFilter {
 		log.info("----- 审计日志入库 -----");
 		return null;
 	}
-
-
 
 }

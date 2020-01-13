@@ -7,7 +7,6 @@ import com.wesley.gateway.dto.TokenInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.*;
-import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Created by Yani on 2019/12/25
  */
 @Slf4j
-@Component
+//@Component SpringSecurity已实现
 public class OAuthFilter extends ZuulFilter {
 
     private final RestTemplate restTemplate = new RestTemplate();

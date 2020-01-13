@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author jojo
  */
 @Slf4j
-@Component
+//@Component SpringSecurity已实现
 public class AuthorizationFilter extends ZuulFilter {
 
     @Override
