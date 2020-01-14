@@ -1,9 +1,12 @@
 package com.wesley.gateway.config;
 
+import com.wesley.gateway.security.GatewayWebSecurityExpressionHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
 /**
  * <p>
@@ -16,11 +19,21 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @EnableResourceServer
 public class GatewaySecurityConfig extends ResourceServerConfigurerAdapter {
 
+    @Autowired
+    GatewayWebSecurityExpressionHandler gatewayWebSecurityExpressionHandler;
+
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+        resources.expressionHandler(gatewayWebSecurityExpressionHandler);
+    }
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-            // 请求Token的请求 不进行验证
+            // 申请token的请求 不进行验证
             .antMatchers("/token/**").permitAll()
-            .anyRequest().authenticated();
+            .anyRequest()
+            // 自定义安全表达式, 需要写表达式处理器
+            .access("#permissionService.hasPermission(request, authentication)");
     }
 }

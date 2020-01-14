@@ -1,2 +1,13 @@
 server:
   port: 9080
+
+security:
+  oauth2:
+    client:
+      # 访问 认证服务器 需要的Client身份认证信息
+      client-id: orderService
+      client-secret: "123456"
+    resource:
+      jwt:
+        # 获取认证服务器 JWT 签名密钥地址，拿到后网关则可以进行JWT的校验
+        key-uri: http://auth.imooc.com:9090/oauth/token_key
