@@ -26,4 +26,5 @@ public class GatewayWebSecurityExpressionHandler extends OAuth2WebSecurityExpres
         evaluationContext.setVariable("permissionService", permissionService);
         return evaluationContext;
     }
+
 }
