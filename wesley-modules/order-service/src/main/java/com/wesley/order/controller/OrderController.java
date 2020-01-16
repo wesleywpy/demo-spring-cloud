@@ -1,5 +1,8 @@
 package com.wesley.order.controller;
 
+import com.alibaba.csp.sentinel.Entry;
+import com.alibaba.csp.sentinel.SphU;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.wesley.order.domain.OrderDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,7 +30,14 @@ public class OrderController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public OrderDTO create(@RequestBody OrderDTO orderDto, @AuthenticationPrincipal String username) {
         // 获取认证中的信息
-        log.info(" ----- 认证信息: username: {} -----", username);
+
+        // 阿里 Sentinel 限流
+        try (Entry entry = SphU.entry("CreateOrder")) {
+            log.info(" ----- 认证信息: username: {} -----", username);
+        } catch (BlockException e) {
+            log.warn(" ----- Sentinel: Blocked! -----", username);
+        }
+
         orderDto.setOrderId(123455L);
         return orderDto;
     }
