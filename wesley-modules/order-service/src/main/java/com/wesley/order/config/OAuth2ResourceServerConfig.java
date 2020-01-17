@@ -1,5 +1,6 @@
 package com.wesley.order.config;
 
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,6 +30,8 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+            // 暴露 promethus 相关Endpoint
+            .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
             // 权限表达式配置
             .antMatchers(HttpMethod.POST).access("#oauth2.hasScope('write')")
             .antMatchers(HttpMethod.GET).access("#oauth2.hasScope('read')");

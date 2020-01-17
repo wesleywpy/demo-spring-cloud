@@ -1,0 +1,21 @@
+global:
+  scrape_interval:   15s
+  
+scrape_configs:
+- job_name:       'springboot-app'
+
+  scrape_interval: 10s
+  metrics_path: '/actuator/prometheus'
+  # 应用服务访问地址
+  static_configs:
+  - targets: ['host.docker.internal:9082']
+    labels:
+      application: 'springboot-app'
+
+- job_name: 'prometheus'
+  # 每5秒pull一次数据
+  scrape_interval: 5s
+  # 抓取数据的地址, 这里为Docker容器本机
+  static_configs:
+  - targets: ['localhost:9090']
+

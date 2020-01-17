@@ -11,3 +11,15 @@ security:
       jwt:
         # 获取认证服务器 JWT 签名密钥地址，拿到后网关则可以进行JWT的校验
         key-uri: http://auth.imooc.com:9090/oauth/token_key
+
+management:
+  endpoints:
+    promethus:
+      enable: true
+    web:
+      exposure:
+        # 暴露的Endpoint
+        include:
+        - prometheus
+        - info
+        - health
