@@ -11,7 +11,7 @@
     </modules>
 
     <parent>
-        <artifactId>demo-micro-service</artifactId>
+        <artifactId>demo-spring-cloud</artifactId>
         <groupId>com.wesley.study</groupId>
         <version>3.0-SNAPSHOT</version>
     </parent>
