@@ -3,12 +3,7 @@ package org.wesley.cloud.controller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -40,8 +35,8 @@ public class ComputeController {
     /**
      * RestTemplate Ribbon
      */
-    @GetMapping("/consumer")
+    @GetMapping("/id")
     public String dcRibbon(){
-        return restTemplate.getForObject("http://eureka-client/dc", String.class);
+        return restTemplate.getForObject("http://eureka-producer/uuid", String.class);
     }
 }

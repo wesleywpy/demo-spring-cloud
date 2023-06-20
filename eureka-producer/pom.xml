@@ -2,29 +2,36 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
+    <artifactId>eureka-producer</artifactId>
+    <name>${artifactId}</name>
     <groupId>com.wesley.study</groupId>
-    <artifactId>demo-spring-cloud</artifactId>
     <version>4.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-
-    <modules>
-<!--        <module>wesley-modules</module>-->
-<!--        <module>wesley-api</module>-->
-<!--        <module>wesley-auth</module>-->
-<!--        <module>wesley-zuul</module>-->
-    </modules>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>1.8</java.version>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.complir.version>1.8</java.complir.version>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 
         <spring.boot.version>2.3.2.RELEASE</spring.boot.version>
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+    </dependencies>
 
     <dependencyManagement>
         <dependencies>
@@ -45,4 +52,7 @@
         </dependencies>
     </dependencyManagement>
 
+    <build>
+        <finalName>${project.artifactId}</finalName>
+    </build>
 </project>
